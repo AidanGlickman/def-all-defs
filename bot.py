@@ -52,13 +52,13 @@ def main():
     api = tweepy.API(auth, wait_on_rate_limit=True,
                      wait_on_rate_limit_notify=True)
 
-    # streamListener = MyStreamListener(api)
-    # stream = tweepy.Stream(auth=api.auth, listener=streamListener)
-    # stream.filter(follow=[config['twitter.com']['ACCOUNT_ID']])
+    streamListener = MyStreamListener(api)
+    stream = tweepy.Stream(auth=api.auth, listener=streamListener)
+    stream.filter(follow=[config['twitter.com']['ACCOUNT_ID']])
 
-    for tweet in tweepy.Cursor(api.user_timeline, id=config['twitter.com']['ACCOUNT_ID']).items():
-        processTweet(api, config, tweet.id_str)
-        input()
+    # for tweet in tweepy.Cursor(api.user_timeline, id=config['twitter.com']['ACCOUNT_ID']).items():
+    #     processTweet(api, config, tweet.id_str)
+    #     input()
 
 
 main()
