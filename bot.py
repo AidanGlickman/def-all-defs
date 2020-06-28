@@ -25,7 +25,7 @@ def processTweet(api, config, tweet_id):
     contents = '\n'.join(
         re.sub('[,\.!?"]', '', status.full_text).split('\n')[1:]).split()
     contents = list(filter(lambda x: x[0] not in ['@', '#', '$'], contents))
-    for word in contents:
+    for word in list(dict.fromkeys(contents)):
         try:
             response = requests.get('https://dictionaryapi.com/api/v3/references/collegiate/json/' +
                                     word + '?key=' + config['dictionaryapi.com']['API_KEY'])
