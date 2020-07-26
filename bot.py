@@ -23,7 +23,7 @@ def processTweet(api, config, tweet_id):
     status = api.get_status(tweet_id, tweet_mode='extended')
     # print(status.id_str)
     contents = '\n'.join(
-        re.sub('[,\.!?"]', '', status.full_text).split('\n')[1:]).split()
+        re.sub('[^a-zA-Z\']', '', status.full_text).split('\n')[1:]).split()
     contents = list(filter(lambda x: x[0] not in ['@', '#', '$'], contents))
     for word in list(dict.fromkeys(contents)):
         try:
